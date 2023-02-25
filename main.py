@@ -25,5 +25,14 @@ def get_bot_response():
     user_text = request.args.get('msg')
     return str(generate_response(user_text))
 
+#Define the route for handling POST requests
+@server.route('/ask', methods=['POST'])
+def post_bot_response():
+    user_text = request.form['msg']
+    bot_response = str(generate_response(user_text))
+    return json.dumps({'response': bot_response})
+
+# Define the index route
+
 if __name__ == '__main__':
     server.run(debug=False, host='0.0.0.0', port=8088)
